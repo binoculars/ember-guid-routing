@@ -10,3 +10,25 @@
         <li>{{#link-to "login"}}Log in{{/link-to}}</li>
     {{/if}}
 </ul>
+
+<h1>Nodes:</h1>
+<ul>
+    {{#each model.nodes as |node|}}
+        <li>
+            {{#link-to 'guid' node.id}}
+                {{node.title}}
+            {{/link-to}}
+        </li>
+    {{/each}}
+</ul>
+
+<h1>Preprints:</h1>
+<ul>
+    {{#each model.preprints as |preprint|}}
+        <li>
+            {{#link-to 'guid' preprint.id}}
+                {{preprint.node.title}}
+            {{/link-to}}
+        </li>
+    {{/each}}
+</ul>

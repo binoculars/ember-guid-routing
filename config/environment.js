@@ -1,28 +1,36 @@
 /* jshint node: true */
 
+const authorizationType = 'cookie';
+
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'demo-ember-osf',
-    environment: environment,
-    rootURL: '/',
-    locationType: 'auto',
-    EmberENV: {
-      FEATURES: {
-        // Here you can enable experimental features on an ember canary build
-        // e.g. 'with-controller': true
+      modulePrefix: 'demo-ember-osf',
+      environment: environment,
+      rootURL: '/',
+      locationType: 'auto',
+      EmberENV: {
+          FEATURES: {
+              // Here you can enable experimental features on an ember canary build
+              // e.g. 'with-controller': true
+          }
+      },
+
+      // User-specific configuration
+      sentry: {
+          dsn: process.env.SENTRY_DSN || '',
+          //cdn: 'https://cdn.ravenjs.com/3.5.1/ember/raven.min.js'
+      },
+
+      APP: {
+          // Here you can pass flags/options to your application instance
+          // when it is created
+      },
+
+      authorizationType,
+      'ember-simple-auth': {
+          authorizer: `authorizer:osf-${authorizationType}`,
+          authenticator: `authenticator:osf-${authorizationType}`
       }
-    },
-
-    // User-specific configuration
-    sentry: {
-        dsn: process.env.SENTRY_DSN || '',
-        //cdn: 'https://cdn.ravenjs.com/3.5.1/ember/raven.min.js'
-    },
-
-    APP: {
-      // Here you can pass flags/options to your application instance
-      // when it is created
-    }
   };
 
   if (environment === 'development') {
